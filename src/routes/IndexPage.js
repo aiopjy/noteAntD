@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 
-import { Button, Input, Layout, List, Checkbox, DatePicker, Form, Table } from 'antd';
+import { Button, Input, Layout, List, Checkbox, DatePicker, Upload, message} from 'antd';
 import moment from 'moment';
 import 'moment/locale/zh-tw';
 moment.locale('zh-tw');
@@ -28,7 +28,7 @@ class IndexPage extends React.Component {
     return (
 
       <Layout className={styles.layout}>
-        <h1>待辦清單- <small></small></h1>
+        <h1>待辦清單<small></small></h1>        
         <Content>
           <Input
             value={this.state.item}
@@ -36,7 +36,6 @@ class IndexPage extends React.Component {
             onChange={(e) => { this.setState({ item: e.target.value }); }}
           />
           <DatePicker onChange={this.handleChange} />
-          
           <Button
             type="primary"
             icon="plus"
@@ -59,6 +58,13 @@ class IndexPage extends React.Component {
                     props.dispatch({ type: 'example/check', index, value: e.target.checked });
                   }}
                 >{item.name}</Checkbox>
+                <Button
+                  className={styles.btnupd}
+                  icon="edit"
+                  onClick={() => {
+                    props.dispatch({ type: 'example/check', index });
+                  }}
+                />
                 <Button
                   className={styles.btndel}
                   type="danger" size="small" shape="circle" icon="cross"
